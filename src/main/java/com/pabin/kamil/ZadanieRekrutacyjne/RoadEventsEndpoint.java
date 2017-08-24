@@ -20,9 +20,11 @@ public class RoadEventsEndpoint {
         this.nearbyPlaceFacade = nearbyPlaceFacade;
     }
 
-    @GetMapping("places")
-    public ResponseEntity<List<EventOnRoad>> sendData(@RequestBody LatLngR latLngR) {
+    @PostMapping("places")
+    public ResponseEntity<List<EventOnRoad>> sendData(@RequestParam(value = "lat") double lat,
+                                                      @RequestParam(value = "lng") double lng,
+                                                      @RequestParam(value = "r") double radius) {
 
-        return new ResponseEntity(nearbyPlaceFacade.findClosest(latLngR) , HttpStatus.OK);
+        return new ResponseEntity(nearbyPlaceFacade.findClosest(new LatLngR(lat,lng,radius)) , HttpStatus.OK);
     }
 }
