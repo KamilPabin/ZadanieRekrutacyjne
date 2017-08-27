@@ -5,20 +5,25 @@ package DataModels;
  */
 public class EventOnRoad {
 
-    private double longitude;
+    private static long IDhelper = 0;
+    private long ID;
+
     private double latitude;
+    private double longitude;
+
 
     private String name;
     private String description;
 
     private String type;
 
-    public EventOnRoad(double longitude, double latitude, String name, String description, String type) {
-        this.longitude = longitude;
+    public EventOnRoad(double latitude, double longitude, String name, String description, String type) {
         this.latitude = latitude;
+        this.longitude = longitude;
         this.name = name;
         this.description = description;
         this.type = type;
+        ID = IDhelper++;
     }
 
     public double getLongitude() {
@@ -39,5 +44,10 @@ public class EventOnRoad {
 
     public String getType() {
         return type;
+    }
+
+
+    public long getID() {
+        return ID;
     }
 }

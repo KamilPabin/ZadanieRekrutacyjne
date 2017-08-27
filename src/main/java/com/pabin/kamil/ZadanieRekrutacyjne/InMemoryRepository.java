@@ -10,21 +10,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class InMemoryRepository {
+class InMemoryRepository {
 
     private List<EventOnRoad> Places = new ArrayList<>();
 
     @Autowired
-    public InMemoryRepository(){
-        Places.add(new EventOnRoad(10.0, 11.0,"Place 1", "desc1", "bus"));
-        Places.add(new EventOnRoad(11.0,15.0,"Place 2", "desc 2", "remont"));
+    public InMemoryRepository() {
+        Places.add(new EventOnRoad(52.45, 18.22, "Ul. Konwaliowa", "Zderzenie dwóch autobusów", "bus"));
+        Places.add(new EventOnRoad(52.0, 18.84, "Ul. Włocławska", "Przebudowa ronda", "remont"));
     }
 
-    public List<EventOnRoad> findClosests(LatLngR data){
-        return Places.stream().filter( p  -> isInRange(p,data)).collect(Collectors.toList());
+    public List<EventOnRoad> findClosests(LatLngR data) {
+        return Places.stream().filter(p -> isInRange(p, data)).collect(Collectors.toList());
     }
 
-    private boolean isInRange(EventOnRoad place , LatLngR myPosition) {
+    private boolean isInRange(EventOnRoad place, LatLngR myPosition) {
         //TODO: Wykonać obliczenia dla odległości punktów
         return true;
     }

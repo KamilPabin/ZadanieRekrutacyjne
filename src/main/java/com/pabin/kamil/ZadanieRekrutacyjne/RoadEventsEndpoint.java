@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/")
-public class RoadEventsEndpoint {
+class RoadEventsEndpoint {
 
     private NearbyPlaceFacade nearbyPlaceFacade;
 
@@ -21,10 +21,8 @@ public class RoadEventsEndpoint {
     }
 
     @PostMapping("places")
-    public ResponseEntity<List<EventOnRoad>> sendData(@RequestParam(value = "lat") double lat,
-                                                      @RequestParam(value = "lng") double lng,
-                                                      @RequestParam(value = "r") double radius) {
-
-        return new ResponseEntity(nearbyPlaceFacade.findClosest(new LatLngR(lat,lng,radius)) , HttpStatus.OK);
+    public ResponseEntity<List<EventOnRoad>> sendData(@RequestBody LatLngR latLngR) {
+        System.out.println(latLngR.getLatitude());
+        return new ResponseEntity(nearbyPlaceFacade.findClosest(latLngR), HttpStatus.OK);
     }
 }

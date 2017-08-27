@@ -21,10 +21,8 @@ public class LatLngR {
         return radius;
     }
 
-    public LatLngR(double latitude, double longitude, double radius) {
-
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.radius = radius;
+    public LatLngR() {
     }
+
+
 }
