@@ -23,11 +23,13 @@ function initMap() {
 
 function showPosition(location) {
     console.log(location);
+
     var requestData = {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
         radius: 10.0
     };
+
     var myCoord = new google.maps.LatLng(location.coords.latitude,
         location.coords.longitude)
     myPosition.setPosition(myCoord);
@@ -35,10 +37,7 @@ function showPosition(location) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/places",
-        data: JSON.stringify(requestData),
-        contentType: "application/json;",
-        dataType: "json"
+        url: "http://localhost:8080/places"
     }).then(function (data) {
         console.log(data);
         clearMarkers();
@@ -52,8 +51,8 @@ function addAllMarkers(data) {
 
         markers[i] = new google.maps.Marker({
             position: new google.maps.LatLng({
-                lat: data[i].latitude,
-                lng: data[i].longitude,
+                lat: data[i].position.latitude,
+                lng: data[i].position.longitude,
             }),
             map: map,
             icon: ChooseColor(data[i])
@@ -64,10 +63,10 @@ function addAllMarkers(data) {
 }
 
 function ChooseColor(data) {
-    switch (data.type) {
-        case 'bus':
+    switch (data.eventType) {
+        case 'ROAD_REPAIRS':
             return 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-        case 'remont':
+        case 'PUBLIC_TRANSPORT_FAILURE':
             return 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
     }
 }
@@ -88,7 +87,7 @@ function addToDescription(data) {
     for (var i = 0; i < data.length; i++) {
 
         var paragraph = document.createElement("P");
-        var t = document.createTextNode(data[i].description);
+        var t = document.createTextNode(data[i].eventDescription);
         paragraph.appendChild(t);
         document.getElementById("desc").appendChild(paragraph);
     }

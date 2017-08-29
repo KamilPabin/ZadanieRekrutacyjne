@@ -3,11 +3,10 @@ package DataModels;
 /**
  * Created by Little on 2017-08-24.
  */
-public class LatLngR {
+public class LatLng {
 
     private double latitude;
     private double longitude;
-    private double radius;
 
     public double getLatitude() {
         return latitude;
@@ -17,12 +16,16 @@ public class LatLngR {
         return longitude;
     }
 
-    public double getRadius() {
-        return radius;
+    public LatLng() {
     }
 
-    public LatLngR() {
+    public LatLng(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
+    public double distanceTo(LatLng point){
 
+        return 0.0;
+    }
 }

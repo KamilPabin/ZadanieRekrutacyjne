@@ -1,28 +1,33 @@
 package com.pabin.kamil.ZadanieRekrutacyjne;
 
 import DataModels.EventOnRoad;
-import DataModels.LatLngR;
+import DataModels.EventType;
+import DataModels.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * Created by Little on 2017-08-24.
- */
-
 @Component
 public class NearbyPlaceFacade {
 
+
     private InMemoryRepository inMemoryRepository;
+    private RoadEventsDto roadEventsDto;
 
     @Autowired
-    public NearbyPlaceFacade(InMemoryRepository inMemoryRepository) {
+    public NearbyPlaceFacade(InMemoryRepository inMemoryRepository, RoadEventsDto roadEventsDto) {
         this.inMemoryRepository = inMemoryRepository;
+        this.roadEventsDto = roadEventsDto;
     }
 
-    public List<EventOnRoad> findClosest(LatLngR currentPosition) {
-        return inMemoryRepository.findClosests(currentPosition);
+    public List<EventOnRoad> findAll() {
+        return roadEventsDto.findAll();
     }
+
+    public List<EventOnRoad> findByEventType(EventType eventType) {
+        return roadEventsDto.findByEventType(eventType);
+    }
+
 
 }

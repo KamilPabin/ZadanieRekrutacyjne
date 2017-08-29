@@ -1,53 +1,23 @@
 package DataModels;
 
-/**
- * Created by Little on 2017-08-24.
- */
+import org.springframework.data.annotation.Id;
+
 public class EventOnRoad {
 
-    private static long IDhelper = 0;
-    private long ID;
+    @Id
+    public String ID;
 
-    private double latitude;
-    private double longitude;
+    public LatLng position;
 
+    public String roadName;
+    public String eventDescription;
 
-    private String name;
-    private String description;
+    public EventType eventType;
 
-    private String type;
-
-    public EventOnRoad(double latitude, double longitude, String name, String description, String type) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.name = name;
-        this.description = description;
-        this.type = type;
-        ID = IDhelper++;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-
-    public long getID() {
-        return ID;
+    public EventOnRoad(LatLng position, String roadName, String eventDescription, EventType eventType) {
+        this.position = position;
+        this.roadName = roadName;
+        this.eventDescription = eventDescription;
+        this.eventType = eventType;
     }
 }

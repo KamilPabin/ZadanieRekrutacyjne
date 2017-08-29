@@ -1,7 +1,8 @@
 package com.pabin.kamil.ZadanieRekrutacyjne;
 
 import DataModels.EventOnRoad;
-import DataModels.LatLngR;
+import DataModels.EventType;
+import DataModels.LatLng;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +15,15 @@ class InMemoryRepository {
 
     private List<EventOnRoad> Places = new ArrayList<>();
 
-    @Autowired
     public InMemoryRepository() {
-        Places.add(new EventOnRoad(52.45, 18.22, "Ul. Konwaliowa", "Zderzenie dwóch autobusów", "bus"));
-        Places.add(new EventOnRoad(52.0, 18.84, "Ul. Włocławska", "Przebudowa ronda", "remont"));
+        Places.add(new EventOnRoad(new LatLng(52.45, 18.22), "Ul. Konwaliowa",
+                "Zderzenie dwóch autobusów", EventType.PUBLIC_TRANSPORT_FAILURE));
+        Places.add(new EventOnRoad(new LatLng(52.0, 18.84), "Ul. Włocławska",
+                "Przebudowa ronda", EventType.ROAD_REPAIRS));
     }
 
-    public List<EventOnRoad> findClosests(LatLngR data) {
-        return Places.stream().filter(p -> isInRange(p, data)).collect(Collectors.toList());
+    public List<EventOnRoad> findClosests(LatLng data) {
+        return Places.stream().filter(p -> data.distanceTo(p.position) < 10).collect(Collectors.toList());
     }
 
-    private boolean isInRange(EventOnRoad place, LatLngR myPosition) {
-        //TODO: Wykonać obliczenia dla odległości punktów
-        return true;
-    }
 }
