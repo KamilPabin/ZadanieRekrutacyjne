@@ -21,6 +21,17 @@ function initMap() {
     }
 }
 
+function onChangeCallBack(){
+
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        console.log("GPS not supported");
+    }
+
+}
+
 function showPosition(location) {
 
     console.log(location);
@@ -30,15 +41,32 @@ function showPosition(location) {
     myPosition.setPosition(myCoord);
     map.panTo(myCoord);
 
+
     $.ajax({
-        type: "POST",
-        url: "localhost:8080/places"
+        url: createGetRequest(location)
     }).then(function (data) {
         console.log(data);
         clearMarkers();
         addAllMarkers(data);
-        addToDescription(data);
     });
+
+}
+
+function createGetRequest(position) {
+    var url = "http://localhost:8080/places?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude;
+
+    if (document.getElementById('roadRepairs').checked) {
+        url += "&eventType=ROAD_REPAIRS";
+    }
+    if (document.getElementById('publicTransportFailure').checked) {
+        url += "&eventType=PUBLIC_TRANSPORT_FAILURE";
+    }
+
+    if (document.getElementById('trafficJams').checked) {
+        url += "&eventType=JAM";
+    }
+
+    return url;
 }
 
 function addAllMarkers(data) {

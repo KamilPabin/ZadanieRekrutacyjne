@@ -19,11 +19,14 @@
 
 <div id="map"></div>
 <div id="menu">
-    Odległość w której mają być wyszukiwane zdarzenia <input type = "range" id="radius"> </br>
+    Odległość w której mają być wyszukiwane zdarzenia <input type="range" id="radius" min="100" max="1500"> </br>
     Rodzaj wydarzeń <br>
-    <label><input type = "checkbox" id ="raodRepairs"> remonty drogowe</label><br>
-    <label><input type = "checkbox" id ="publicTransportFailure"> awarie komunikacji miejskiej</label><br>
-    <label><input type = "checkbox" id ="trafficJams"> korki drogowe</label><br>
+    <label><input type="checkbox" id="roadRepairs" checked="checked" onchange="onChangeCallBack()"> remonty
+        drogowe</label><br>
+    <label><input type="checkbox" id="publicTransportFailure" checked="checked" onchange="onChangeCallBack()"> awarie
+        komunikacji miejskiej</label><br>
+    <label><input type="checkbox" id="trafficJams" checked="checked" onchange="onChangeCallBack()"> korki
+        drogowe</label><br>
 </div>
 <div id="desc" style="overflow-y : auto">
 </div>

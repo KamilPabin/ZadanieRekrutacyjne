@@ -50,7 +50,7 @@ class RoadEventsDto {
         List<EventOnRoad> result;
 
         if(parameters.getEventTypeList().isEmpty()) {
-            result = myInterface.findAll();
+            return new ArrayList();
         } else {
             result = findByEventType(parameters.getEventTypeList());
         }

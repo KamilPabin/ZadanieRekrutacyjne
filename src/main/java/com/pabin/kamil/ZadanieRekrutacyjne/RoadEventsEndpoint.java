@@ -20,7 +20,8 @@ class RoadEventsEndpoint {
         this.nearbyPlaceFacade = nearbyPlaceFacade;
     }
 
-    @PostMapping("places")
+    @CrossOrigin
+    @GetMapping("places")
     public ResponseEntity<List<EventOnRoad>> sendData(@RequestParam double latitude,
                                                       @RequestParam double longitude,
                                                       @RequestParam(required = false, value="eventType", defaultValue="") List<EventType> eventType,
