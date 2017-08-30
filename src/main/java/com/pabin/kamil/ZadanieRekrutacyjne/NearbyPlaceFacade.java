@@ -2,7 +2,7 @@ package com.pabin.kamil.ZadanieRekrutacyjne;
 
 import DataModels.EventOnRoad;
 import DataModels.EventType;
-import DataModels.RequestBody;
+import DataModels.FilterParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,5 +29,7 @@ public class NearbyPlaceFacade {
         return roadEventsDto.findByEventType(eventType);
     }
 
-
+    public List<EventOnRoad> filter(FilterParameters parameters) {
+        return roadEventsDto.filter(parameters);
+    }
 }

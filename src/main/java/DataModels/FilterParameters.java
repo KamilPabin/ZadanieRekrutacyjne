@@ -1,17 +1,23 @@
 package DataModels;
 
+import DataModels.EventType;
+import DataModels.LatLng;
+
 import java.util.List;
 
-/**
- * Created by Little on 2017-08-29.
- */
-public class RequestBody {
+public class FilterParameters {
 
     private LatLng position;
     private List<EventType> eventTypeList;
     private double radius;
 
-    public RequestBody() {
+    public FilterParameters() {
+    }
+
+    public FilterParameters(LatLng position, List<EventType> eventTypeList, double radius) {
+        this.position = position;
+        this.eventTypeList = eventTypeList;
+        this.radius = radius;
     }
 
     public LatLng getPosition() {

@@ -21,8 +21,15 @@ class RoadEventsEndpoint {
     }
 
     @PostMapping("places")
-    public ResponseEntity<List<EventOnRoad>> sendData() {
+    public ResponseEntity<List<EventOnRoad>> sendData(@RequestParam double latitude,
+                                                      @RequestParam double longitude,
+                                                      @RequestParam(required = false, value="eventType", defaultValue="") List<EventType> eventType,
+                                                      @RequestParam(required = false, value="radius", defaultValue="0.0")double radius) {
 
-        return new ResponseEntity(nearbyPlaceFacade.findAll() , HttpStatus.OK);
+        return new ResponseEntity(nearbyPlaceFacade.filter(new FilterParameters(
+                new LatLng(latitude, longitude),
+                eventType,
+                radius
+        )) , HttpStatus.OK);
     }
 }

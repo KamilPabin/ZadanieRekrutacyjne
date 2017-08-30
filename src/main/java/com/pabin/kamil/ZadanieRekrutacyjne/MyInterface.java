@@ -12,6 +12,4 @@ import java.util.List;
 interface MyInterface extends MongoRepository<EventOnRoad, String> {
 
     List<EventOnRoad> findByEventType(EventType type);
-    List<EventOnRoad> findByEventType(List<EventType> eventTypes);
-
 }

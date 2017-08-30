@@ -10,7 +10,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -19,6 +18,13 @@
 
 
 <div id="map"></div>
+<div id="menu">
+    Odległość w której mają być wyszukiwane zdarzenia <input type = "range" id="radius"> </br>
+    Rodzaj wydarzeń <br>
+    <label><input type = "checkbox" id ="raodRepairs"> remonty drogowe</label><br>
+    <label><input type = "checkbox" id ="publicTransportFailure"> awarie komunikacji miejskiej</label><br>
+    <label><input type = "checkbox" id ="trafficJams"> korki drogowe</label><br>
+</div>
 <div id="desc" style="overflow-y : auto">
 </div>
 <script async defer

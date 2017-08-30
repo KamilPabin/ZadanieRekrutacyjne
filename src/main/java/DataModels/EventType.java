@@ -6,5 +6,6 @@ package DataModels;
 public enum EventType {
     JAM,
     PUBLIC_TRANSPORT_FAILURE,
-    ROAD_REPAIRS
+    ROAD_REPAIRS,
+    ALL
 }

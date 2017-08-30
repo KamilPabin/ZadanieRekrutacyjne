@@ -2,10 +2,12 @@ package com.pabin.kamil.ZadanieRekrutacyjne;
 
 import DataModels.EventOnRoad;
 import DataModels.EventType;
+import DataModels.FilterParameters;
 import DataModels.LatLng;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +31,38 @@ class RoadEventsDto {
     }
 
     public List<EventOnRoad> findByEventType(List<EventType> eventTypes) {
-        return myInterface.findByEventType(eventTypes);
+        List<EventOnRoad> result = new ArrayList();
+        for (EventType event : eventTypes) {
+            result.addAll(findByEventType(event));
+        }
+        return result;
     }
+
+    public List<EventOnRoad> findClosest(LatLng position, double radius) {
+        return myInterface.findAll().stream().filter(p -> {
+            //TODO: implement distance calculation
+            return true;
+        }).collect(Collectors.toList());
+    }
+
+    public List<EventOnRoad> filter(FilterParameters parameters) {
+
+        List<EventOnRoad> result;
+
+        if(parameters.getEventTypeList().isEmpty()) {
+            result = myInterface.findAll();
+        } else {
+            result = findByEventType(parameters.getEventTypeList());
+        }
+
+        if(parameters.getRadius() == 0) {
+            return result;
+        }
+
+        return findClosest(parameters.getPosition(),parameters.getRadius());
+
+
+
+    }
+
 }

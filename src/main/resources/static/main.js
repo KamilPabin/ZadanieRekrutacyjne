@@ -22,13 +22,8 @@ function initMap() {
 }
 
 function showPosition(location) {
-    console.log(location);
 
-    var requestData = {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        radius: 10.0
-    };
+    console.log(location);
 
     var myCoord = new google.maps.LatLng(location.coords.latitude,
         location.coords.longitude)
@@ -37,7 +32,7 @@ function showPosition(location) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/places"
+        url: "localhost:8080/places"
     }).then(function (data) {
         console.log(data);
         clearMarkers();
