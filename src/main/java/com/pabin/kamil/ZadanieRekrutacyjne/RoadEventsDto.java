@@ -39,10 +39,17 @@ class RoadEventsDto {
     }
 
     public List<EventOnRoad> findClosest(LatLng position, double radius) {
-        return myInterface.findAll().stream().filter(p -> {
-            //TODO: implement distance calculation
-            return true;
-        }).collect(Collectors.toList());
+        return myInterface.findAll().stream().filter(p ->
+            position.distanceTo(p.position) < radius
+        ).collect(Collectors.toList());
+    }
+
+    public List<EventOnRoad> findClosest(LatLng position, double radius, List<EventOnRoad> list) {
+
+        return list.stream().filter(p ->
+            position.distanceTo(p.position) < radius
+        ).collect(Collectors.toList());
+
     }
 
     public List<EventOnRoad> filter(FilterParameters parameters) {
@@ -59,9 +66,7 @@ class RoadEventsDto {
             return result;
         }
 
-        return findClosest(parameters.getPosition(),parameters.getRadius());
-
-
+        return findClosest(parameters.getPosition(),parameters.getRadius(),result);
 
     }
 

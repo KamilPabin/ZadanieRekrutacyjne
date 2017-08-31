@@ -32,6 +32,10 @@ function onChangeCallBack(){
 
 }
 
+function onChangeRadiusCallBack(value){
+    $("#showRadius").text(value + " m");
+}
+
 function showPosition(location) {
 
     console.log(location);
@@ -65,6 +69,7 @@ function createGetRequest(position) {
     if (document.getElementById('trafficJams').checked) {
         url += "&eventType=JAM";
     }
+    url += "&radius=" + document.getElementById("radius").value;
 
     return url;
 }
@@ -78,7 +83,8 @@ function addAllMarkers(data) {
                 lng: data[i].position.longitude,
             }),
             map: map,
-            icon: ChooseColor(data[i])
+            icon: ChooseColor(data[i]),
+            title : data.eventType
         });
 
 
@@ -91,6 +97,8 @@ function ChooseColor(data) {
             return 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
         case 'PUBLIC_TRANSPORT_FAILURE':
             return 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+        case 'JAM':
+            return 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
     }
 }
 
@@ -103,16 +111,4 @@ function setMapOnAll(map) {
 function clearMarkers() {
     setMapOnAll(null);
     markers = [];
-}
-
-function addToDescription(data) {
-    $("#desc").empty();
-    for (var i = 0; i < data.length; i++) {
-
-        var paragraph = document.createElement("P");
-        var t = document.createTextNode(data[i].eventDescription);
-        paragraph.appendChild(t);
-        document.getElementById("desc").appendChild(paragraph);
-    }
-
 }

@@ -22,9 +22,11 @@ class ZadanieRekrutacyjneApplication implements CommandLineRunner{
     public void run(String... args) throws Exception {
         myInterface.deleteAll();
 
-        myInterface.save(new EventOnRoad(new LatLng(52.45, 18.22), "Ul. Konwaliowa",
+        myInterface.save(new EventOnRoad(new LatLng(52.3954, 16.9636), "Ul. Konwaliowa",
                 "Zderzenie dwóch autobusów", EventType.PUBLIC_TRANSPORT_FAILURE));
-        myInterface.save(new EventOnRoad(new LatLng(52.0, 18.84), "Ul. Włocławska",
+        myInterface.save(new EventOnRoad(new LatLng(52.3874, 16.84), "Ul. Włocławska",
                 "Przebudowa ronda", EventType.ROAD_REPAIRS));
+        myInterface.save(new EventOnRoad(new LatLng(52.3966,16.92),"Ul. Katowicka",
+                "Korek", EventType.JAM));
     }
 }
